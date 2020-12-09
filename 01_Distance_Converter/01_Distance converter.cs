@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Practical_CS_StudyProject._01_Distance_Converter
 {
+
     class _01_Distance_converter
     {
         private static void Main(string[] args)
@@ -13,33 +14,34 @@ namespace Practical_CS_StudyProject._01_Distance_Converter
            // 인수 지정 -> Length가 1이상이고 인수가 tom이면 Feet -> Meter
             if (args.Length >= 1 && args[0] == "-tom")
             {
-                for (int feet = 1; feet <= 10; feet++)
-                {
-                    double meter = FeetToMeter(feet);
-                    Console.WriteLine("{0} ft = {1:0.0000} m", feet, meter);
-                }
+                PrintFeetToMeterList(1,10);
             }
             // 그 이외일 시 Meter -> Feet
             else
             {
-                for(int meter = 1; meter <= 10; meter++)
-                {
-                    double feet = MeterToFeet(meter);
-                    Console.WriteLine("{0} m = {1:0.0000} ft", meter, feet);
-                }
+                PrintMeterToFeetList(1, 10);
             }
         }
 
-
-        // 계산 로직을 메서드의 형태로 독립
-        private static double FeetToMeter(int feet)
+        static void PrintFeetToMeterList(int start, int stop)
         {
-            return feet * 0.3048;
+            FeetConverter converter = new FeetConverter();
+            for (int feet = start; feet <= stop; feet++)
+            {
+                double meter = converter.ToMeter(feet);
+                Console.WriteLine("{0} ft = {1:0.0000} m", feet, meter);
+            }
         }
 
-        private static double MeterToFeet(int meter)
+        static void PrintMeterToFeetList(int start, int stop)
         {
-            return meter / 0.3048;
+            FeetConverter converter = new FeetConverter();
+            for (int meter = start; meter <= stop; meter++)
+            {
+                double feet = converter.ToMeter(meter);
+                Console.WriteLine("{0} m = {1:0.0000} ft", meter, feet);
+            }
         }
+
     }
 }
